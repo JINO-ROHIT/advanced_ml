@@ -1,0 +1,46 @@
+Total Parameters: 50890
+Hyperparameters:
+n_embd: 10
+n_hidden: 64
+n_classes: 10
+batch_size: 64
+learning_rate: 0.01
+num_epochs: 3
+-------------------------------
+Epoch 1/3, Batch 0/938, Loss: 3.5113
+Epoch 1/3, Batch 100/938, Loss: 1.1630
+Epoch 1/3, Batch 200/938, Loss: 0.5984
+Epoch 1/3, Batch 300/938, Loss: 0.5959
+Epoch 1/3, Batch 400/938, Loss: 0.4181
+Epoch 1/3, Batch 500/938, Loss: 0.4385
+Epoch 1/3, Batch 600/938, Loss: 0.3661
+Epoch 1/3, Batch 700/938, Loss: 0.4646
+Epoch 1/3, Batch 800/938, Loss: 0.6094
+Epoch 1/3, Batch 900/938, Loss: 0.3430
+Epoch 1/3, Average Loss: 0.6603
+-------------------------------
+Epoch 2/3, Batch 0/938, Loss: 0.5224
+Epoch 2/3, Batch 100/938, Loss: 0.2465
+Epoch 2/3, Batch 200/938, Loss: 0.3531
+Epoch 2/3, Batch 300/938, Loss: 0.3682
+Epoch 2/3, Batch 400/938, Loss: 0.4318
+Epoch 2/3, Batch 500/938, Loss: 0.3043
+Epoch 2/3, Batch 600/938, Loss: 0.3296
+Epoch 2/3, Batch 700/938, Loss: 0.1731
+Epoch 2/3, Batch 800/938, Loss: 0.4083
+Epoch 2/3, Batch 900/938, Loss: 0.2373
+Epoch 2/3, Average Loss: 0.3357
+-------------------------------
+Epoch 3/3, Batch 0/938, Loss: 0.2911
+Epoch 3/3, Batch 100/938, Loss: 0.3853
+Epoch 3/3, Batch 200/938, Loss: 0.2626
+Epoch 3/3, Batch 300/938, Loss: 0.1118
+Epoch 3/3, Batch 400/938, Loss: 0.4061
+Epoch 3/3, Batch 500/938, Loss: 0.3388
+Epoch 3/3, Batch 600/938, Loss: 0.1777
+Epoch 3/3, Batch 700/938, Loss: 0.2333
+Epoch 3/3, Batch 800/938, Loss: 0.2359
+Epoch 3/3, Batch 900/938, Loss: 0.2514
+Epoch 3/3, Average Loss: 0.2809
+-------------------------------
+Accuracy on test set: 92.27%
