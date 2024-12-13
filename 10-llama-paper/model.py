@@ -3,8 +3,8 @@
 from pydantic import BaseModel
 import torch
 import torch.nn as nn
-
-from typing import Tuple
+import torch.nn.functional as F
+from typing import Tuple, Optional
 
 class ModelArgs(BaseModel):
     dim: int = 4096 # the embedding dimension
@@ -64,3 +64,40 @@ def apply_rotary_emb(
     xq_out = torch.view_as_real(xq_ * freqs_cis).flatten(3)
     xk_out = torch.view_as_real(xk_ * freqs_cis).flatten(3)
     return xq_out.type_as(xq), xk_out.type_as(xk)
+
+class FeedForward(nn.Module):
+    def __init__(
+        self,
+        dim: int,
+        hidden_dim: int,
+        multiple_of: int,
+        ffn_dim_multiplier: Optional[float] = None,
+    ):
+        # this seems to be called Gated Linear Units, which is a product of two linear layers, still dont get it why it works??
+        super().__init__()
+        hidden_dim = int(2 * hidden_dim / 3)
+        # custom dim factor multiplier
+        if ffn_dim_multiplier is not None:
+            hidden_dim = int(ffn_dim_multiplier * hidden_dim)
+        hidden_dim = multiple_of * ((hidden_dim + multiple_of - 1) // multiple_of)
+
+        self.w1 = nn.Linear(
+            dim, hidden_dim, bias=False
+        )
+        self.w2 = nn.Linear(
+            hidden_dim, dim, bias=False
+        )
+        self.w3 = nn.Linear(
+            dim, hidden_dim, bias=False
+        )
+
+    def forward(self, x):
+        # (B, Seq_Len, Dim) --> (B, Seq_Len, Hidden_Dim)
+        swish = F.silu(self.w1(x))
+        # (B, Seq_Len, Dim) --> (B, Seq_Len, Hidden_Dim)
+        x_V = self.w3(x)
+        # (B, Seq_Len, Hidden_Dim) * (B, Seq_Len, Hidden_Dim) --> (B, Seq_Len, Hidden_Dim)
+        x = swish * x_V
+        # (B, Seq_Len, Hidden_Dim) --> (B, Seq_Len, Dim)
+        x = self.w2(x)
+        return x
