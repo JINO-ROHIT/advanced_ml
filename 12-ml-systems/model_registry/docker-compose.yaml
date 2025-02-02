@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:14.5
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=model_db
+
+    hostname: localhost
+    restart: always
+    stdin_open: true
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

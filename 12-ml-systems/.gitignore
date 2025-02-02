@@ -1,5 +1,6 @@
 postgres/*
 venv/
+__pycache__/
 
 .env
 play.ipynb
