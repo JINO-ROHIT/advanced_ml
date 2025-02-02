@@ -1,0 +1,5 @@
+postgres/*
+venv/
+
+.env
+play.ipynb
