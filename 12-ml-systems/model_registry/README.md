@@ -37,24 +37,28 @@ This project provides a model registry for machine learning experiments using Fa
 
 ### Environment Variables
 
-1. Create a `.env` file with the following content:
+1. Create a `.env` file with the following content from the `.env.example`
 
-
-2. Run the following command to start the services:
-
-```bash
-docker compose up -d
-```
-
-3. Start the FastAPI application:
+2. Build the containers:
 
 ```bash
-uvicorn main:app
+make build
 ```
 
+3. Start the containers:
 
-TO-DO
+```bash
+make up
+```
 
-Fix the environment variable handling.
-Dockerize the application completely.
-Makefile
+3. [Optionally] push the containers to your registry:
+
+```bash
+make push
+```
+
+4. Shut down the containers
+
+```bash
+make down
+```

@@ -3,7 +3,7 @@ import os
 POSTGRES_USER = "user"
 POSTGRES_PASSWORD = "password"
 POSTGRES_DB = "model_db"
-POSTGRES_SERVER = "localhost"
+POSTGRES_SERVER = "postgres"
 POSTGRES_PORT = "5432"
 
 class DBConfigurations:
