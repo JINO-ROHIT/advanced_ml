@@ -1,6 +1,8 @@
 postgres/*
 venv/
 __pycache__/
+train_data/
+weights/
 
 .env
 play.ipynb
