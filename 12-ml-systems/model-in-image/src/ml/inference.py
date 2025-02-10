@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-from PIL import Image
 from torchvision import models, transforms
 from loguru import logger
 
@@ -55,9 +54,10 @@ class Inference:
         return self.labels[str(predicted.item())]
 
 
-if __name__ == '__main__':
-    test_data = Image.open('../train_data/hymenoptera_data/train/ants/0013035.jpg')
-    engine = Inference()
-    print(engine)
-    prediction = engine(test_data)
-    print(f"Prediction: {prediction}")
+# if __name__ == '__main__':
+#     from PIL import Image
+#     test_data = Image.open('../train_data/hymenoptera_data/train/ants/0013035.jpg')
+#     engine = Inference()
+#     print(engine)
+#     prediction = engine(test_data)
+#     print(f"Prediction: {prediction}")
