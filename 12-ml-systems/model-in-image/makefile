@@ -18,3 +18,12 @@ build:
 .PHONY: push
 push:
 	docker push $(DOCKER_REPOSITORY):$(MODEL_DB)_$(IMAGE_VERSION)
+
+.PHONY: deploy
+deploy:
+	kubectl apply -f manifests/namespace.yaml
+	kubectl apply -f manifests/deployment.yaml
+
+.PHONY: delete
+delete:
+	kubectl delete ns model-in-image
