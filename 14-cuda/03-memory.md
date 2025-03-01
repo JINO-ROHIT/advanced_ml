@@ -73,4 +73,4 @@ Shared memory usage can also limit the threads per SM.
 one SM say can accomodate 8 blocks.
 one SM has 16kb of shared memory.
 
-each block should not take more than 2kb of shared memory. If each block uses more than 2 kB of memory, the number of blocks that can reside in each SM is such that the total amount of shared memory used by these blocks does not exceed 16 kB; for example, if each block uses 5 kB of shared memory, no more than 3 blocks can be assigned to each SM.=
+each block should not take more than 2kb of shared memory. If each block uses more than 2 kB of memory, the number of blocks that can reside in each SM is such that the total amount of shared memory used by these blocks does not exceed 16 kB; for example, if each block uses 5 kB of shared memory, no more than 3 blocks can be assigned to each SM.
