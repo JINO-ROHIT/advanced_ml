@@ -32,7 +32,7 @@ Global memory access in CUDA is very slow (hundreds of clock cycles per access),
 
 Memory types
 
-![alt text](image-2.png)
+![alt text](assets/image-2.png)
 
 1. Global memory - read and write by the host.
 2. Constant memory -  supports short-latency, high-bandwidth, read-only access by the device when all threads simultaneously access the same location.

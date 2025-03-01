@@ -2,7 +2,7 @@
 
 CPU VS GPU
 
-<img src="image.png" alt="alt text" width="800"/>
+<img src="./assets/image.png" alt="alt text" width="800"/>
 
 CPU is designed to run a sequence of operations as fast as possible.
 GPU is designed to run thousands of these operations in parallel, basically higher throughput.
@@ -24,7 +24,7 @@ When you run a CUDA program -
 
 #### The thread hierarchy
 
-![alt text](image-1.png)
+![alt text](./assets/image-1.png)
 
 When a kernel is launched, a grid of parallel threads are launched.
 

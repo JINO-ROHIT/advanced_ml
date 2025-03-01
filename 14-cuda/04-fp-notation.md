@@ -80,8 +80,8 @@ To maximize accuracy, data can be presorted before performing reduction operatio
 For example, consider summing the numbers 
 
 Sequential Summation: The smaller numbers may be lost when added to the larger ones.
-![alt text](image-4.png)
+![alt text](./assets/image-4.png)
 
 
 Parallel Summation: Adding the smaller numbers first preserves their contribution to the final result.
-![alt text](image-5.png)
+![alt text](./assets/image-5.png)
