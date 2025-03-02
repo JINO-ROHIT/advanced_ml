@@ -6,13 +6,16 @@
 
 const int M = 1000;
 const int N = 1000;
-const int THREADS_COUNT = 1024;
+const int THREADS_PER_DIM = 32;
 
 __global__ void add_ten(const float *a, float *out, int row, int col) {
-    int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    
-    if (idx < row * col) {
-        out[idx] = a[idx] + 10;
+    int idx_x = threadIdx.x;
+    int idx_y = threadIdx.y;
+
+    int curr_idx = idx_x * row + idx_y;
+
+    if (idx_x < row && idx_y < col) {
+        out[curr_idx] = a[curr_idx] + 10;
     }
 }
 
@@ -33,9 +36,9 @@ int main() {
     cudaMalloc(&d_out, M * N * sizeof(float));
     
     cudaMemcpy(d_A, h_A, M * N * sizeof(float), cudaMemcpyHostToDevice);
-    
-    add_ten<<<1, THREADS_COUNT>>>(d_A, d_out, M, N);
-    
+
+    dim3 threads(THREADS_PER_DIM, THREADS_PER_DIM);
+    add_ten<<<1, threads>>>(d_A, d_out, M, N);
     
     cudaDeviceSynchronize();
     
