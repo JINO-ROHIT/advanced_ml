@@ -1,3 +1,5 @@
+// Implement a "kernel" (GPU function) that adds 10 to each position of vector a and stores it in vector out. You have 1 thread per position.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <cuda_runtime.h>

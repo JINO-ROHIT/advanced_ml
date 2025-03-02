@@ -1,10 +1,12 @@
+// Implement a kernel that adds 10 to each position of a and stores it in out. Input a is 2D and square. You have more threads than positions.(again dont use a block)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <cuda_runtime.h>
 
 const int M = 1000;
 const int N = 1000;
-const int THREADS_PER_BLOCK = 256;
+const int THREADS_COUNT = 1024;
 
 __global__ void add_ten(const float *a, float *out, int row, int col) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
@@ -32,8 +34,7 @@ int main() {
     
     cudaMemcpy(d_A, h_A, M * N * sizeof(float), cudaMemcpyHostToDevice);
     
-    int numBlocks = (M * N + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
-    add_ten<<<numBlocks, THREADS_PER_BLOCK>>>(d_A, d_out, M, N);
+    add_ten<<<1, THREADS_COUNT>>>(d_A, d_out, M, N);
     
     
     cudaDeviceSynchronize();
