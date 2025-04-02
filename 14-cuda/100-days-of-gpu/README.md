@@ -12,3 +12,8 @@ Day2
 
 2. - [VectorAdd](day2/sumArray.cu) - a kernel to do vector addition
    - learned how to configure and use nvidia nsight to profile kernels and understand bottlenecks
+
+Day3
+
+3. - [TritonVectorAdd](day3/grayscale.py) - a triton kernel to do vector addition.
+   - watching the gpu mode tutorial on triton - https://www.youtube.com/watch?v=DdTsX6DQk24&ab_channel=GPUMODE
