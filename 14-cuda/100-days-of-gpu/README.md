@@ -15,5 +15,5 @@ Day2
 
 Day3
 
-3. - [TritonVectorAdd](day3/grayscale.py) - a triton kernel to do vector addition.
+3. - [TritonVectorAdd](day3/vectorAdd.py) - a triton kernel to do vector addition.
    - watching the gpu mode tutorial on triton - https://www.youtube.com/watch?v=DdTsX6DQk24&ab_channel=GPUMODE
