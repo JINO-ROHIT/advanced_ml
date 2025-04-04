@@ -22,3 +22,9 @@ Day4
 
 4. - [TritonGrayScale](day4/grayscale.py) - a triton kernel to grayscale an image.
    - watching the gpu mode tutorial on triton - https://www.youtube.com/watch?v=DdTsX6DQk24&ab_channel=GPUMODE
+
+Day5
+
+5. - [TritonGrayScaleBenchmarking](day5/grayscale_with_benchmark.py) - benchmarking the previous grayscale kernel.
+
+![alt text](assets/grayscale_benchmark.png)
