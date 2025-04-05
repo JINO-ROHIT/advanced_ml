@@ -28,3 +28,8 @@ Day5
 5. - [TritonGrayScaleBenchmarking](day5/grayscale_with_benchmark.py) - benchmarking the previous grayscale kernel.
 
 ![alt text](assets/grayscale_benchmark.png)
+
+Day6
+
+6. - [SoftmaxKernel](day6/naive_softmax.py) - Implementing a naive softmax kernel.
+
