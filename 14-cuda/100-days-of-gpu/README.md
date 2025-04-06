@@ -33,3 +33,10 @@ Day6
 
 6. - [SoftmaxKernel](day6/naive_softmax.py) - Implementing a naive softmax kernel.
 
+Day7
+
+7. - [FusedSoftmaxKernel](day7/fused_softmax.py) - Implementing the fused softmax from the triton tutorials and benchmarking against the pytorch version of it. 
+Reading on what kernel warmup does.
+
+![alt text](assets/fused_softmax.png)
+
