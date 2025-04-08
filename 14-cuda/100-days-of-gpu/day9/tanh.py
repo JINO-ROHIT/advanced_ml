@@ -21,7 +21,7 @@ def _tanh_kernel(
         exp_pos = tl.exp(row)
         exp_neg = tl.exp(-row)
         result = (exp_pos - exp_neg) / (exp_pos + exp_neg)
-        tl.store(output_ptr + col_offsets, result, mask = mask)
+        tl.store(out_row_start_ptr + col_offsets, result, mask = mask)
 
 def solution(input, output, n: int, m: int):
     BLOCK_SIZE = triton.next_power_of_2(n)
