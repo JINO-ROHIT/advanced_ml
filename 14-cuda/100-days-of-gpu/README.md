@@ -41,3 +41,5 @@ Reading on what kernel warmup does.
 ![alt text](assets/fused_softmax.png)
 
 8. - [DropoutKernel](day8/dropout.py) - Implementing a memory efficient dropout kernel in triton from the tutorials.
+
+9. [TanhKernel](day9/tanh.py) - Implementing a tanh kernel.
