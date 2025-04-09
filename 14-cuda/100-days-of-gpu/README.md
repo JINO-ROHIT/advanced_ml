@@ -43,3 +43,5 @@ Reading on what kernel warmup does.
 8. - [DropoutKernel](day8/dropout.py) - Implementing a memory efficient dropout kernel in triton from the tutorials.
 
 9. [TanhKernel](day9/tanh.py) - Implementing a tanh kernel.
+
+10. [Sigmoidkernel](day10/sigmoid.py) - Implementing a sigmoid kernel.
