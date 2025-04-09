@@ -1,5 +1,6 @@
 import triton
 import triton.language as tl
+import torch
 
 @triton.jit 
 def _tanh_kernel(
@@ -33,3 +34,17 @@ def solution(input, output, n: int, m: int):
         m, n, BLOCK_SIZE
     )
     return output
+
+def test_tanh():
+    n, m = 16, 8
+    input_tensor = torch.randn((m, n), dtype=torch.float32, device='cuda')
+    output_tensor = torch.empty_like(input_tensor, device='cuda')
+
+    solution(input_tensor, output_tensor, n, m)
+    expected_output = torch.tanh(input_tensor)
+
+    assert torch.allclose(output_tensor, expected_output, atol=1e-2), "Triton and PyTorch results do not match!"
+
+if __name__ == "__main__":
+    test_tanh()
+    print("All tests passed!")
