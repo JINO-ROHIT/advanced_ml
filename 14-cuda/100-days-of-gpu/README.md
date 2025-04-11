@@ -47,3 +47,5 @@ Reading on what kernel warmup does.
 10. [Sigmoidkernel](day10/sigmoid.py) - Implementing a sigmoid kernel.
 
 11. [Selukernel](day11/selu.py) - Implementing a selu kernel.
+
+12. [Relukernel](day12/relu.py) - Implementing a relu kernel.
