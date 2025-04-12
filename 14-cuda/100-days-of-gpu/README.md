@@ -49,3 +49,5 @@ Reading on what kernel warmup does.
 11. [Selukernel](day11/selu.py) - Implementing a selu kernel.
 
 12. [Relukernel](day12/relu.py) - Implementing a relu kernel.
+
+13. [SwishKernel](day13/swish.py) - Implementing a swish kernel.
