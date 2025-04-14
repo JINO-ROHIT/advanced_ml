@@ -52,4 +52,6 @@ Reading on what kernel warmup does.
 
 13. [SwishKernel](day13/swish.py) - Implementing a swish kernel.
 
-13. [Softpluskernel](day14/softplus.py) - Implementing a softplus kernel.
+14. [Softpluskernel](day14/softplus.py) - Implementing a softplus kernel.
+
+15. [LeakyRelu and Elu](day15/leaky_relu.py) - Implementing leaky relu and elu kernels.
