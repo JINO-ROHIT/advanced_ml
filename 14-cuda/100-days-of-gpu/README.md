@@ -55,3 +55,5 @@ Reading on what kernel warmup does.
 14. [Softpluskernel](day14/softplus.py) - Implementing a softplus kernel.
 
 15. [LeakyRelu and Elu](day15/leaky_relu.py) - Implementing leaky relu and elu kernels.
+
+16. [GeluKernel](day16/gelu.py) - Implementing gelu kernel.
