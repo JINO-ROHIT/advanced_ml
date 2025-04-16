@@ -57,3 +57,5 @@ Reading on what kernel warmup does.
 15. [LeakyRelu and Elu](day15/leaky_relu.py) - Implementing leaky relu and elu kernels.
 
 16. [GeluKernel](day16/gelu.py) - Implementing gelu kernel.
+
+17. [outer_add](day17/block_outer_vector_add.py) - Implementing naive and block wise outer vector add.
