@@ -61,3 +61,5 @@ Reading on what kernel warmup does.
 17. [outer_add](day17/block_outer_vector_add.py) - Implementing naive and block wise outer vector add.
 
 18. [FusedMul](day18/fused_outer_mul.py) - Implemented fused outer multiplcation along with backward.
+
+19. [LongSum](day19/long_sum.py) - Implemented sum across a batch of numbers
