@@ -62,4 +62,6 @@ Reading on what kernel warmup does.
 
 18. [FusedMul](day18/fused_outer_mul.py) - Implemented fused outer multiplcation along with backward.
 
-19. [LongSum](day19/long_sum.py) - Implemented sum across a batch of numbers
+19. [LongSum](day19/long_sum.py) - Implemented sum across a batch of numbers.
+
+20. [LongSoftmax](day20/long_softmax.py) - Implemented numerically stable version of softmax.
