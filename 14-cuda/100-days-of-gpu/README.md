@@ -65,3 +65,5 @@ Reading on what kernel warmup does.
 19. [LongSum](day19/long_sum.py) - Implemented sum across a batch of numbers.
 
 20. [LongSoftmax](day20/long_softmax.py) - Implemented numerically stable version of softmax.
+
+21. [ScalarFlashAttention](day21/scalar_flash_attention.py) - Implemented a scalar version of flash attention.
