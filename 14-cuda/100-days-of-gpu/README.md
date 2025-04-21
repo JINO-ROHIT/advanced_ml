@@ -67,3 +67,5 @@ Reading on what kernel warmup does.
 20. [LongSoftmax](day20/long_softmax.py) - Implemented numerically stable version of softmax.
 
 21. [ScalarFlashAttention](day21/scalar_flash_attention.py) - Implemented a scalar version of flash attention.
+
+22. [Conv2d](day22/2d_conv.py) - Implemented a simple convolution 2d kernel.
