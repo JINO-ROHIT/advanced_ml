@@ -69,3 +69,5 @@ Reading on what kernel warmup does.
 21. [ScalarFlashAttention](day21/scalar_flash_attention.py) - Implemented a scalar version of flash attention.
 
 22. [Conv2d](day22/2d_conv.py) - Implemented a simple convolution 2d kernel.
+
+23. [BatchmatrixMul](day23/matmul.py) - Implemented matrix multiplication over a batch.
