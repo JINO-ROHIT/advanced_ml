@@ -71,3 +71,5 @@ Reading on what kernel warmup does.
 22. [Conv2d](day22/2d_conv.py) - Implemented a simple convolution 2d kernel.
 
 23. [BatchmatrixMul](day23/matmul.py) - Implemented matrix multiplication over a batch.
+
+24. [QuantizedMatrixMul](day24/quantized_matmul.py) - Implemented quantized matrix multiplication.
