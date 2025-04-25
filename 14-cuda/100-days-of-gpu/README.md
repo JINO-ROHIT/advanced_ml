@@ -73,3 +73,5 @@ Reading on what kernel warmup does.
 23. [BatchmatrixMul](day23/matmul.py) - Implemented matrix multiplication over a batch.
 
 24. [QuantizedMatrixMul](day24/quantized_matmul.py) - Implemented quantized matrix multiplication.
+
+25. Put together the solved and unsolved sasha triton puzzles.
