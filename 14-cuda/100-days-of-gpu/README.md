@@ -75,3 +75,5 @@ Reading on what kernel warmup does.
 24. [QuantizedMatrixMul](day24/quantized_matmul.py) - Implemented quantized matrix multiplication.
 
 25. Put together the solved and unsolved sasha triton puzzles. Solutions here - [tritonpuzzles](../triton-puzzles/)
+
+26. Watching Umar Jamil lectures on Flash Attention.
