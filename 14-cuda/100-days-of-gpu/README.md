@@ -77,3 +77,5 @@ Reading on what kernel warmup does.
 25. Put together the solved and unsolved sasha triton puzzles. Solutions here - [tritonpuzzles](../triton-puzzles/)
 
 26. Watching Umar Jamil lectures on Flash Attention.
+
+27. [MishKernel](day27/mish.py) - Implementing mish kernel with bechmarking with better perf than pytorch kernels.
