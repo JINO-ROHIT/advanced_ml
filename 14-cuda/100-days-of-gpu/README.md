@@ -79,3 +79,5 @@ Reading on what kernel warmup does.
 26. Watching Umar Jamil lectures on Flash Attention.
 
 27. [MishKernel](day27/mish.py) - Implementing mish kernel with bechmarking with better perf than pytorch kernels.
+
+28. [MishwithBackward](day28/mish_with_backward.py) - Completing the backward pass for the mish kernel.
