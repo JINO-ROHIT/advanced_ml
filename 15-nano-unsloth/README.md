@@ -8,7 +8,10 @@ References -
 2. https://github.com/huggingface/transformers/tree/main/src/transformers/models
 
 Architectures to be implemented -
-1. Llama
+1. Llama - 
+
+![alt text](artifacts/image.png)
+
 2. Llama4
 3. Gemma
 4. Gemma 2
