@@ -16,3 +16,42 @@ class LlamaRMSNorm(nn.Module):
         variance = hidden_states.pow(2).mean(-1, keepdim = True)
         hidden_states = hidden_states * torch.rsqrt(variance + self.variance_epsilon)
         return self.weight * hidden_states.to(input_dtype)
+
+### rotary positional embeddings
+
+def _compute_default_rope_parameters(
+        dim: int,
+        base: int = 10_000,
+        device: str = 'cuda',
+):
+    # compute inverse frequencies
+    inv_freq = 1.0 / (base ** (torch.arange(0, dim, 2, dtype = torch.int64).to(device = device, dtype = torch.float) / dim))
+    return inv_freq, 1
+
+class LlamaRotaryEmbedding(nn.Module):
+    def __init__(self, config : LlamaConfig, device = None):
+        self.rope_type = 'default' # we are implementing only the default
+        self.max_seq_len_cached = config.max_position_embeddings
+        self.original_max_seq_len = config.max_position_embeddings
+
+        self.config = config
+
+        _partial_rotary_factor = 1.0
+        _head_dim = config.hidden_size // config.num_attention_heads
+        _dim = int(_head_dim * _partial_rotary_factor)
+        inv_freq, self.attention_scaling = _compute_default_rope_parameters(_dim, config.rope_theta)
+        self.register_buffer("inv_freq", inv_freq, persistent = False) # dont add as a part of state dict
+    
+    @torch.no_grad()
+    def forward(self, x, position_ids):
+        inv_freq_expanded = self.inv_freq[None, :, None].float().expand(position_ids.shape[0], -1, 1).to(x.device)
+        position_ids_expanded = position_ids[:, None, :].float()
+
+        device_type = x.device.type if isinstance(x.device.type, str) and x.device.type != "mps" else "cpu"
+        with torch.autocast(device_type=device_type, enabled=False):  # Force float32
+            freqs = (inv_freq_expanded.float() @ position_ids_expanded.float()).transpose(1, 2)
+            emb = torch.cat((freqs, freqs), dim=-1)
+            cos = emb.cos() * self.attention_scaling
+            sin = emb.sin() * self.attention_scaling
+
+        return cos.to(dtype=x.dtype), sin.to(dtype=x.dtype)
