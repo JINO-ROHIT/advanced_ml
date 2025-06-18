@@ -3,7 +3,7 @@ from typing import Callable, Optional, Tuple
 import torch
 import torch.nn as nn
 
-from config import LlamaConfig
+from .config import LlamaConfig
 
 class LlamaRMSNorm(nn.Module):
     def __init__(self, hidden_size, eps = 1e-6):
