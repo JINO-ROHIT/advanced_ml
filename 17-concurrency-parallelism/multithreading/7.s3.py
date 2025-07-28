@@ -1,4 +1,4 @@
-"""In this tutorial, we will see how to upload multiple files to an s3 bucket using multi processing"""
+"""In this tutorial, we will see how to upload multiple files to an s3 bucket using multi threading"""
 
 import threading
 import concurrent.futures
