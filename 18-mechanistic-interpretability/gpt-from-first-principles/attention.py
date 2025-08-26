@@ -1,9 +1,7 @@
-import math
-from jaxtyping import Float, Int
+from jaxtyping import Float
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from torch import Tensor
 
 from transformer_lens import HookedTransformer
