@@ -1,4 +1,4 @@
-// multiple blocks, 1024 threads
+// multiple blocks, 512 threads
 // 1d indexing to element wise add.
 
 #include <stdio.h>
