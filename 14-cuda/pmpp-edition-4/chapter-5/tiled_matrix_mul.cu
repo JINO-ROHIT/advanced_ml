@@ -180,7 +180,7 @@ void matrixMulTiling(float* M, float* N, float* P, int m, int n, int o) {
 }
 
 float benchmark(void (*func)(float*, float*, float*, int, int, int), float* M, float* N, float* P, int m, int n, int o,
-                int warmup = 25, int reps = 100) {
+                int warmup = 2, int reps = 10) {
     for (int i = 0; i < warmup; ++i) {
         func(M, N, P, m, n, o);
     }
