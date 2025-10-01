@@ -33,6 +33,25 @@ __global__ void covergent_sum_reduction_kernel_reversed(float* input, float* out
     }
 }
 
+__global__ void shared_memory_sum_reduction_kernel(float* input, float* output) {
+    __shared__ float input_s[BLOCK_DIM];
+    unsigned int t = threadIdx.x;
+
+    input_s[t] = input[t] + input[t + BLOCK_DIM];
+
+    // we already did the first iteration compared to covergent_sum_reduction_kernel so we start with the 2nd one
+    for (unsigned int stride = blockDim.x / 2; stride >= 1; stride /= 2) {
+        __syncthreads();
+        if (t < stride) {
+            input_s[t] += input_s[t + stride];
+        }
+    }
+
+    if (t == 0) {
+        *output = input_s[0];
+    }
+}
+
 float simple_parallel_sum_reduction(float* data, int length) {
     assert(length == 2 * BLOCK_DIM && "Length must be equal to 2 * BLOCK_DIM");
 
