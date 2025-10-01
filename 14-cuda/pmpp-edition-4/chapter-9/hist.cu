@@ -4,6 +4,9 @@
 #define BIN_SIZE 4
 #define NUM_BINS ((26 + BIN_SIZE - 1) / BIN_SIZE)
 
+// --------------------------------------------------------------------------------------------------------------------------------------------------------
+// assertion check
+
 #define CUDA_CHECK(call)                                                                                 \
     do {                                                                                                \
         cudaError_t error = call;                                                                       \
@@ -25,6 +28,7 @@ inline void gpuAssert(cudaError_t code, const char* file, int line, bool abort =
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+// kernels
 
 __global__ void histo_kernel(char* data, unsigned int length, unsigned int* histo) {
     unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -35,6 +39,56 @@ __global__ void histo_kernel(char* data, unsigned int length, unsigned int* hist
         }
     }
 }
+
+// using a private histo block and then merging them
+__global__ void histo_private_kernel(char* data, unsigned int length, unsigned int* histo) {
+    unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i < length) {
+        int alphabet_position = data[i] - 'a';
+        if (alphabet_position >= 0 && alphabet_position < 26) {
+            atomicAdd(&histo[blockIdx.x * NUM_BINS + alphabet_position / BIN_SIZE], 1);
+        }
+    }
+
+    if (blockIdx.x > 0) {
+        __syncthreads();
+        for (unsigned int bin = threadIdx.x; bin < NUM_BINS; bin += blockDim.x) {
+            unsigned int binValue = histo[blockIdx.x * NUM_BINS + bin];
+            if (binValue > 0) {
+                atomicAdd(&histo[bin], binValue);
+            }
+        }
+    }
+}
+
+// using shared memory with a private histo block
+__global__ void histo_private_kernel_shared_memory(char* data, unsigned int length, unsigned int* histo) {
+    __shared__ unsigned int histo_s[NUM_BINS];
+    for (unsigned int bin = threadIdx.x; bin < NUM_BINS; bin += blockDim.x) {
+        histo_s[bin] = 0u;
+    }
+    __syncthreads();
+
+    unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i < length) {
+        int alphabet_position = data[i] - 'a';
+        if (alphabet_position >= 0 && alphabet_position < 26) {
+            atomicAdd(&histo_s[alphabet_position / BIN_SIZE], 1);
+        }
+    }
+    __syncthreads();
+
+    // Commit to the global memory
+    for (unsigned int bin = threadIdx.x; bin < NUM_BINS; bin += blockDim.x) {
+        unsigned int binValue = histo_s[bin];
+        if (binValue > 0) {
+            atomicAdd(&histo[bin], binValue);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------
+// kernel functions
 
 inline unsigned int cdiv(unsigned int a, unsigned int b) {
     return (a + b - 1) / b;
@@ -62,14 +116,24 @@ void histogram_parallel(char* data, unsigned int length, unsigned int* histo) {
     CUDA_CHECK(cudaFree(d_histo));
 }
 
-int main() {
-    const char data[] = "abcdefghijklmnopqrstuvwxyz";
-    unsigned int histo[NUM_BINS] = {0};
-    histogram_parallel((char*)data, sizeof(data) - 1, histo);
+void histogram_parallel_private(char* data, unsigned int length, unsigned int* histo) {
+    char* d_data;
+    unsigned int* d_histo;
 
-    printf("Histogram bins:\n");
-    for (int i = 0; i < NUM_BINS; ++i) {
-        printf("Bin %d: %u\n", i, histo[i]);
-    }
-    return 0;
+    dim3 dimBlock(1024);
+    dim3 dimGrid(cdiv(length, dimBlock.x));
+
+    CUDA_CHECK(cudaMalloc((void**)&d_data, length * sizeof(char)));
+    CUDA_CHECK(cudaMemcpy(d_data, data, length * sizeof(char), cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMalloc((void**)&d_histo,
+                          NUM_BINS * dimGrid.x * sizeof(unsigned int)));  // here we allocate NUM_BINS for every block
+
+    histo_private_kernel<<<dimGrid, dimBlock>>>(d_data, length, d_histo);
+
+    CUDA_CHECK(cudaGetLastError());
+    CUDA_CHECK(cudaDeviceSynchronize());
+    CUDA_CHECK(cudaMemcpy(histo, d_histo, NUM_BINS * sizeof(unsigned int), cudaMemcpyDeviceToHost));
+
+    CUDA_CHECK(cudaFree(d_data));
+    CUDA_CHECK(cudaFree(d_histo));
 }
