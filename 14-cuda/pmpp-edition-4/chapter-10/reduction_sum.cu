@@ -107,3 +107,23 @@ float covergent_parallel_sum_reduction_reversed(float* data, int length) {
 
     return total;
 }
+
+float shared_memory_sum_reduction_kernel(float* data, int length){
+    assert(length == 2 * BLOCK_DIM && "length must be equal to 2 * BLOCK_DIM");
+
+    float total;
+    float* d_total;
+    float *d_data;
+
+    dim3 dimBlock(BLOCK_DIM); //1024
+    dim3 dimGrid(1); // single block
+
+    CUDA_CHECK(cudaMalloc((void **)&d_data, length * sizeof(float)));
+    CUDA_CHECK(cudaMalloc((void **)&d_total, sizeof(float)));
+
+    shared_memory_sum_reduction_kernel<<<dimGrid, dimBlock>>>(d_data, d_total);
+
+    CUDA_CHECK(cudaMemcpy(&total, d_total, sizeof(float), cudaMemcpyDeviceToHost));
+
+    return total;
+}
