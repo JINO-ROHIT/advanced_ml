@@ -2,3 +2,5 @@ venv/
 play.ipynb
 __pycache__
 .vscode
+
+.DS_Store
